@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - name: 🚚 Get latest code
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: 📂 Sync Leader whitelist
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
@@ -17,6 +17,6 @@ jobs:
           server: ${{ secrets.ftp_main_server }}
           username: ${{ secrets.ftp_main_username }}
           password: ${{ secrets.ftp_main_password }}
-          local-dir: /othercfg/
-          server-dir: /csgo/addons/sourcemod/configs/othercfg/
+          local-dir: othercfg/
+          server-dir: addons/sourcemod/configs/othercfg/
 
