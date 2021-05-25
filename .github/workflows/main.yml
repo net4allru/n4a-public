@@ -1,12 +1,16 @@
 name: ZE CSGO Server
+
 on:
   push:
-    branches: [ main ]
+    branches:
+    - main
   workflow_dispatch:
+
 jobs:
   upload:
     name: 🚀 Deploy ZE CSGO
     runs-on: ubuntu-20.04
+    if: github.ref == 'refs/heads/main'
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v2
@@ -21,3 +25,42 @@ jobs:
           local-dir: othercfg/
           server-dir: addons/sourcemod/configs/othercfg/
 
+      - name: 📂 Sync BossHP
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.ftp_main_server }}
+          username: ${{ secrets.ftp_main_username }}
+          password: ${{ secrets.ftp_main_password }}
+          port: ${{ secrets.ftp_main_port }}
+          local-dir: bosshp/
+          server-dir: addons/sourcemod/configs/othercfg/bosshp/
+
+      - name: 📂 Sync MapAdmin
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.ftp_main_server }}
+          username: ${{ secrets.ftp_main_username }}
+          password: ${{ secrets.ftp_main_password }}
+          port: ${{ secrets.ftp_main_port }}
+          local-dir: mapadmin/
+          server-dir: addons/sourcemod/configs/othercfg/mapadmin/
+
+      - name: 📂 Sync SaveLevel
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.ftp_main_server }}
+          username: ${{ secrets.ftp_main_username }}
+          password: ${{ secrets.ftp_main_password }}
+          port: ${{ secrets.ftp_main_port }}
+          local-dir: savelevel/
+          server-dir: addons/sourcemod/configs/othercfg/savelevel/
+
+      - name: 📂 Sync EntWatch
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.ftp_main_server }}
+          username: ${{ secrets.ftp_main_username }}
+          password: ${{ secrets.ftp_main_password }}
+          port: ${{ secrets.ftp_main_port }}
+          local-dir: entwatch/
+          server-dir: cfg/sourcemod/entwatch/maps/
